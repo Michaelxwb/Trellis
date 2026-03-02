@@ -64,11 +64,33 @@ export const createBootstrapScript = readTemplate(
   "scripts/create_bootstrap.py",
 );
 
-// Role spec templates
+// Role spec templates - PM
 export const specRolesPm = readTemplate("spec/roles/pm/index.md");
+export const specRolesPmPrdTemplate = readTemplate(
+  "spec/roles/pm/prd-template.md",
+);
+export const specRolesPmChangelogTemplate = readTemplate(
+  "spec/roles/pm/changelog-template.md",
+);
+
+// Role spec templates - Designer
 export const specRolesDesigner = readTemplate("spec/roles/designer/index.md");
+export const specRolesDesignerPrototypeGuidelines = readTemplate(
+  "spec/roles/designer/prototype-guidelines.md",
+);
+export const specRolesDesignerChangelogTemplate = readTemplate(
+  "spec/roles/designer/changelog-template.md",
+);
+
+// Role spec templates - Frontend
 export const specRolesFrontendImpl = readTemplate(
   "spec/roles/frontend-impl/index.md",
+);
+export const specRolesFrontendImplApiIntegration = readTemplate(
+  "spec/roles/frontend-impl/api-integration.md",
+);
+export const specRolesFrontendImplChangelogTemplate = readTemplate(
+  "spec/roles/frontend-impl/changelog-template.md",
 );
 
 // Configuration files
@@ -124,9 +146,32 @@ export function getAllScripts(): Map<string, string> {
 export function getAllRoleSpecs(): Map<string, string> {
   const specs = new Map<string, string>();
 
+  // PM
   specs.set("pm/index.md", specRolesPm);
+  specs.set("pm/prd-template.md", specRolesPmPrdTemplate);
+  specs.set("pm/changelog-template.md", specRolesPmChangelogTemplate);
+
+  // Designer
   specs.set("designer/index.md", specRolesDesigner);
+  specs.set(
+    "designer/prototype-guidelines.md",
+    specRolesDesignerPrototypeGuidelines,
+  );
+  specs.set(
+    "designer/changelog-template.md",
+    specRolesDesignerChangelogTemplate,
+  );
+
+  // Frontend
   specs.set("frontend-impl/index.md", specRolesFrontendImpl);
+  specs.set(
+    "frontend-impl/api-integration.md",
+    specRolesFrontendImplApiIntegration,
+  );
+  specs.set(
+    "frontend-impl/changelog-template.md",
+    specRolesFrontendImplChangelogTemplate,
+  );
 
   return specs;
 }

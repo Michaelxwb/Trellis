@@ -47,6 +47,7 @@ For triggered tasks, include all sections below:
 | **Hit a gotcha** | Learned that X must be done before Y | Relevant code-spec + "Common Mistakes" section |
 | **Established a convention** | Team agreed on naming pattern | `quality-guidelines.md` |
 | **New thinking trigger** | "Don't forget to check X before doing Y" | `guides/*.md` (as a checklist item, not detailed rules) |
+| **Role workflow insight** | Better PRD structure, prototype checklist | `roles/{your-role}/*.md` |
 
 **Key Insight**: Code-spec updates are NOT just for problems. Every feature implementation contains design decisions and contracts that future AI/developers need to execute safely.
 
@@ -62,10 +63,30 @@ For triggered tasks, include all sections below:
 ├── frontend/          # Frontend coding standards
 │   ├── index.md       # Overview and links
 │   └── *.md           # Topic-specific guidelines
-└── guides/            # Thinking checklists (NOT coding specs!)
-    ├── index.md       # Guide index
-    └── *.md           # Topic-specific guides
+├── guides/            # Thinking checklists (NOT coding specs!)
+│   ├── index.md       # Guide index
+│   └── *.md           # Topic-specific guides
+└── roles/             # Role-specific work standards (collaboration mode)
+    ├── pm/            # PM: PRD standards, changelog conventions
+    ├── designer/      # Designer: prototype standards, mock data conventions
+    └── frontend-impl/ # Frontend: API integration standards, code quality
 ```
+
+### Role-Aware Updates (Collaboration Mode)
+
+If the project uses three-role collaboration (`.trellis/roles.json` exists):
+
+1. **Check your role** by reading `.trellis/.developer` and `.trellis/roles.json`
+2. **Update your role spec** in `roles/{your-role}/` for role-specific learnings
+3. **Update tech stack specs** in `backend/` or `frontend/` for reusable patterns
+
+| Your Role | Your Role Spec Dir | Also Update |
+|-----------|-------------------|-------------|
+| pm | `roles/pm/` | (rarely needs tech specs) |
+| designer | `roles/designer/` | `frontend/component-guidelines.md` |
+| frontend | `roles/frontend-impl/` | `frontend/`, `backend/` as relevant |
+
+**Decision Rule**: "Is this specific to my role's workflow?" → `roles/{role}/`. "Is this a tech pattern any developer would use?" → `backend/` or `frontend/`.
 
 ### CRITICAL: Code-Spec vs Guide - Know the Difference
 

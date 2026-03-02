@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6346ec91-1be5-41bb-8b07-ac6783da6baf" name="Changes" comment="修复一些问题">
-      <change beforePath="$PROJECT_DIR$/src/commands/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/init.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/claude/commands/trellis/update-spec.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/claude/commands/trellis/update-spec.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/trellis/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +45,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "main",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/jahan",
+    "last_opened_file_path": "/Users/jahan/workspace/Trellis",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "pnpm",
