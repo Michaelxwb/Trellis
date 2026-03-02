@@ -5,21 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6346ec91-1be5-41bb-8b07-ac6783da6baf" name="Changes" comment="修复一些问题">
-      <change beforePath="$PROJECT_DIR$/.trellis/.template-hashes.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/.template-hashes.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.trellis/.version" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cli/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/cli/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/commands/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/init.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configurators/workflow.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configurators/workflow.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/claude/hooks/inject-subagent-context.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/claude/hooks/inject-subagent-context.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/claude/hooks/ralph-loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/claude/hooks/ralph-loop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/claude/hooks/session-start.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/claude/hooks/session-start.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/claude/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/claude/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/iflow/hooks/inject-subagent-context.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/iflow/hooks/inject-subagent-context.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/iflow/hooks/ralph-loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/iflow/hooks/ralph-loop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/trellis/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/trellis/scripts/common/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/common/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/templates/trellis/scripts/common/paths.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/common/paths.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/template-hash.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/template-hash.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,25 +30,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginOnboardingV2&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/jahan&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.GoLinterPluginOnboardingV2": "true",
+    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "git-widget-placeholder": "main",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/Users/jahan",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "ts.external.directory.path": "/Users/jahan/workspace/Trellis/node_modules/typescript/lib"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

@@ -718,7 +718,8 @@ from pathlib import Path
 success = upsert_developer_role(${pyName}, ${pyRole}, ${pyDir}, Path(${pyCwd}))
 sys.exit(0 if success else 1)
 `;
-          execSync(`${pythonCmd} -c ${JSON.stringify(rolesScript)}`, {
+          execSync(`${pythonCmd} -`, {
+            input: rolesScript,
             cwd,
             encoding: "utf-8",
             stdio: ["pipe", "pipe", "pipe"],
