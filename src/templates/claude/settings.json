@@ -22,6 +22,16 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{{PYTHON_CMD}} .claude/hooks/enforce-output-dir.py",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "SubagentStop": [

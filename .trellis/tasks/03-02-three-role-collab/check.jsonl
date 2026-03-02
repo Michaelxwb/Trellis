@@ -1,0 +1,6 @@
+{"file": ".opencode/commands/trellis/finish-work.md", "reason": "Finish work checklist"}
+{"file": ".opencode/commands/trellis/check-backend.md", "reason": "Backend check spec"}
+{"file": "src/templates/trellis/scripts/common/paths.py", "reason": "Verify path constant added correctly"}
+{"file": "docs/Trellis-三角色协作流水线模块设计说明书.md", "reason": "Verify against design spec"}
+{"file": "src/commands/init.ts", "reason": "Verify init.ts changes"}
+{"file": "src/cli/index.ts", "reason": "Verify CLI option added"}

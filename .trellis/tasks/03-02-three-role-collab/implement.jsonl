@@ -1,0 +1,9 @@
+{"file": ".trellis/workflow.md", "reason": "Project workflow and conventions"}
+{"file": ".trellis/spec/backend/index.md", "reason": "Backend development guide"}
+{"file": "src/templates/trellis/scripts/common/paths.py", "reason": "Path constants pattern - add FILE_ROLES_JSON"}
+{"file": "src/templates/trellis/scripts/common/registry.py", "reason": "JSON read/write pattern reference"}
+{"file": "src/templates/trellis/scripts/common/developer.py", "reason": "Module structure pattern reference"}
+{"file": "docs/Trellis-三角色协作流水线模块设计说明书.md", "reason": "Design spec - roles.json schema and function signatures"}
+{"file": "src/commands/init.ts", "reason": "Main file to modify - add -d option and collaboration mode"}
+{"file": "src/cli/index.ts", "reason": "CLI option definitions - add -d, --dir"}
+{"file": "src/templates/trellis/index.ts", "reason": "Template index - register roles.py"}

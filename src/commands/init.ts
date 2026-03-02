@@ -53,6 +53,26 @@ function getPythonCommand(): string {
 }
 
 // =============================================================================
+// Role Parsing (collaboration mode)
+// =============================================================================
+
+const KNOWN_ROLES = new Set(["pm", "designer", "frontend"]);
+
+function parseRoleFromUsername(username: string): {
+  role: string | null;
+  name: string;
+} {
+  const dashIdx = username.indexOf("-");
+  if (dashIdx > 0) {
+    const prefix = username.substring(0, dashIdx);
+    if (KNOWN_ROLES.has(prefix)) {
+      return { role: prefix, name: username };
+    }
+  }
+  return { role: null, name: username };
+}
+
+// =============================================================================
 // Bootstrap Task Creation
 // =============================================================================
 
@@ -210,11 +230,15 @@ interface TaskJson {
   subtasks: { name: string; status: string }[];
   relatedFiles: string[];
   notes: string;
+  role?: string;
+  output_dir?: string;
 }
 
 function getBootstrapTaskJson(
   developer: string,
   projectType: ProjectType,
+  role?: string | null,
+  outputDir?: string | null,
 ): TaskJson {
   const today = new Date().toISOString().split("T")[0];
 
@@ -243,7 +267,7 @@ function getBootstrapTaskJson(
     relatedFiles = [".trellis/spec/backend/", ".trellis/spec/frontend/"];
   }
 
-  return {
+  const taskJson: TaskJson = {
     id: BOOTSTRAP_TASK_NAME,
     name: "Bootstrap Guidelines",
     description: "Fill in project development guidelines for AI agents",
@@ -259,6 +283,9 @@ function getBootstrapTaskJson(
     relatedFiles,
     notes: `First-time setup task created by trellis init (${projectType} project)`,
   };
+  if (role) taskJson.role = role;
+  if (outputDir) taskJson.output_dir = outputDir;
+  return taskJson;
 }
 
 /**
@@ -268,6 +295,8 @@ function createBootstrapTask(
   cwd: string,
   developer: string,
   projectType: ProjectType,
+  role?: string | null,
+  outputDir?: string | null,
 ): boolean {
   const taskDir = path.join(cwd, PATHS.TASKS, BOOTSTRAP_TASK_NAME);
   const taskRelativePath = `${PATHS.TASKS}/${BOOTSTRAP_TASK_NAME}`;
@@ -282,7 +311,12 @@ function createBootstrapTask(
     fs.mkdirSync(taskDir, { recursive: true });
 
     // Write task.json
-    const taskJson = getBootstrapTaskJson(developer, projectType);
+    const taskJson = getBootstrapTaskJson(
+      developer,
+      projectType,
+      role,
+      outputDir,
+    );
     fs.writeFileSync(
       path.join(taskDir, FILE_NAMES.TASK_JSON),
       JSON.stringify(taskJson, null, 2),
@@ -315,6 +349,7 @@ interface InitOptions {
   antigravity?: boolean;
   yes?: boolean;
   user?: string;
+  dir?: string;
   force?: boolean;
   skipExisting?: boolean;
   template?: string;
@@ -393,6 +428,52 @@ export async function init(options: InitOptions): Promise<void> {
       developerName = await askInput("Your name: ");
     }
     console.log(chalk.blue("👤 Developer:"), chalk.gray(developerName));
+  }
+
+  // Collaboration mode validation
+  let collabRole: string | null = null;
+  let collabOutputDir: string | null = null;
+
+  if (options.dir) {
+    if (!options.user) {
+      console.log(
+        chalk.red(
+          "Error: -d requires -u with a role prefix (e.g., -u pm-alice)",
+        ),
+      );
+      return;
+    }
+    if (!developerName) {
+      console.log(chalk.red("Error: developer name is required for -d"));
+      return;
+    }
+    const parsed = parseRoleFromUsername(developerName);
+    if (!parsed.role) {
+      console.log(
+        chalk.red(
+          `Error: username '${developerName}' has no known role prefix. Use: pm-<name>, designer-<name>, or frontend-<name>`,
+        ),
+      );
+      return;
+    }
+    collabRole = parsed.role;
+    collabOutputDir = options.dir;
+
+    // Reject path traversal (e.g., ../../../etc)
+    const resolved = path.resolve(cwd, collabOutputDir);
+    if (!resolved.startsWith(cwd + path.sep) && resolved !== cwd) {
+      console.log(
+        chalk.red(
+          "Error: -d path must be inside the project root (path traversal detected)",
+        ),
+      );
+      return;
+    }
+
+    // Ensure trailing slash for directory consistency
+    if (!collabOutputDir.endsWith("/")) {
+      collabOutputDir += "/";
+    }
   }
 
   // Detect project type (silent - no output)
@@ -556,6 +637,20 @@ export async function init(options: InitOptions): Promise<void> {
     skipSpecTemplates: useRemoteTemplate,
   });
 
+  // Collaboration mode: create output directory and CHANGELOG
+  if (collabOutputDir) {
+    const outputPath = path.join(cwd, collabOutputDir);
+    fs.mkdirSync(outputPath, { recursive: true });
+
+    // Create initial CHANGELOG.md (do not overwrite if exists)
+    const changelogPath = path.join(outputPath, "CHANGELOG.md");
+    if (!fs.existsSync(changelogPath)) {
+      const dirName = path.basename(collabOutputDir.replace(/\/$/, ""));
+      const changelogContent = `# CHANGELOG - ${dirName}\n\n> 变更记录表，由 AI 自动维护（/trellis:handoff 时追加）。\n\n| 日期 | 作者 | 类型 | 摘要 | 关联文件 |\n|------|------|------|------|----------|\n`;
+      fs.writeFileSync(changelogPath, changelogContent, "utf-8");
+    }
+  }
+
   // Write version file for update tracking
   const versionPath = path.join(cwd, DIR_NAMES.WORKFLOW, ".version");
   fs.writeFileSync(versionPath, VERSION);
@@ -603,8 +698,51 @@ export async function init(options: InitOptions): Promise<void> {
         stdio: "pipe", // Silent
       });
 
+      // Collaboration mode: update roles.json
+      if (collabRole && collabOutputDir) {
+        try {
+          // Use JSON.stringify for all interpolated values to prevent
+          // Python string injection via crafted developer names or paths
+          const pyScriptsDir = JSON.stringify(
+            path.join(cwd, ".trellis", "scripts"),
+          );
+          const pyCwd = JSON.stringify(cwd);
+          const pyName = JSON.stringify(developerName);
+          const pyRole = JSON.stringify(collabRole);
+          const pyDir = JSON.stringify(collabOutputDir);
+          const rolesScript = `
+import sys
+sys.path.insert(0, ${pyScriptsDir})
+from common.roles import upsert_developer_role
+from pathlib import Path
+success = upsert_developer_role(${pyName}, ${pyRole}, ${pyDir}, Path(${pyCwd}))
+sys.exit(0 if success else 1)
+`;
+          execSync(`${pythonCmd} -c ${JSON.stringify(rolesScript)}`, {
+            cwd,
+            encoding: "utf-8",
+            stdio: ["pipe", "pipe", "pipe"],
+          });
+          console.log(
+            chalk.blue(`  Role binding: ${collabRole} → ${collabOutputDir}`),
+          );
+        } catch (error: unknown) {
+          const stderr =
+            error instanceof Error && "stderr" in error
+              ? String((error as { stderr: unknown }).stderr)
+              : "";
+          console.log(chalk.red(`  Failed to update roles.json: ${stderr}`));
+        }
+      }
+
       // Create bootstrap task to guide user through filling guidelines
-      createBootstrapTask(cwd, developerName, projectType);
+      createBootstrapTask(
+        cwd,
+        developerName,
+        projectType,
+        collabRole,
+        collabOutputDir,
+      );
     } catch {
       // Silent failure - user can run init_developer.py manually
     }

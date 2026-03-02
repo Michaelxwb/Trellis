@@ -42,13 +42,16 @@ export const commonTaskUtils = readTemplate("scripts/common/task_utils.py");
 export const commonPhase = readTemplate("scripts/common/phase.py");
 export const commonRegistry = readTemplate("scripts/common/registry.py");
 export const commonCliAdapter = readTemplate("scripts/common/cli_adapter.py");
+export const commonRoles = readTemplate("scripts/common/roles.py");
 
 // Python scripts - multi_agent
 export const multiAgentInit = readTemplate("scripts/multi_agent/__init__.py");
 export const multiAgentStart = readTemplate("scripts/multi_agent/start.py");
 export const multiAgentCleanup = readTemplate("scripts/multi_agent/cleanup.py");
 export const multiAgentStatus = readTemplate("scripts/multi_agent/status.py");
-export const multiAgentCreatePr = readTemplate("scripts/multi_agent/create_pr.py");
+export const multiAgentCreatePr = readTemplate(
+  "scripts/multi_agent/create_pr.py",
+);
 export const multiAgentPlan = readTemplate("scripts/multi_agent/plan.py");
 
 // Python scripts - main
@@ -57,7 +60,16 @@ export const initDeveloperScript = readTemplate("scripts/init_developer.py");
 export const taskScript = readTemplate("scripts/task.py");
 export const getContextScript = readTemplate("scripts/get_context.py");
 export const addSessionScript = readTemplate("scripts/add_session.py");
-export const createBootstrapScript = readTemplate("scripts/create_bootstrap.py");
+export const createBootstrapScript = readTemplate(
+  "scripts/create_bootstrap.py",
+);
+
+// Role spec templates
+export const specRolesPm = readTemplate("spec/roles/pm/index.md");
+export const specRolesDesigner = readTemplate("spec/roles/designer/index.md");
+export const specRolesFrontendImpl = readTemplate(
+  "spec/roles/frontend-impl/index.md",
+);
 
 // Configuration files
 export const workflowMdTemplate = readTemplate("workflow.md");
@@ -84,6 +96,7 @@ export function getAllScripts(): Map<string, string> {
   scripts.set("common/phase.py", commonPhase);
   scripts.set("common/registry.py", commonRegistry);
   scripts.set("common/cli_adapter.py", commonCliAdapter);
+  scripts.set("common/roles.py", commonRoles);
 
   // Multi-agent
   scripts.set("multi_agent/__init__.py", multiAgentInit);
@@ -102,4 +115,18 @@ export function getAllScripts(): Map<string, string> {
   scripts.set("create_bootstrap.py", createBootstrapScript);
 
   return scripts;
+}
+
+/**
+ * Get all role spec templates as a map of relative path to content.
+ * Paths are relative to spec/roles/ (e.g., "pm/index.md").
+ */
+export function getAllRoleSpecs(): Map<string, string> {
+  const specs = new Map<string, string>();
+
+  specs.set("pm/index.md", specRolesPm);
+  specs.set("designer/index.md", specRolesDesigner);
+  specs.set("frontend-impl/index.md", specRolesFrontendImpl);
+
+  return specs;
 }

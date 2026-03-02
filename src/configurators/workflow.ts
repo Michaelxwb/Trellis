@@ -8,6 +8,7 @@ import {
   workflowMdTemplate,
   worktreeYamlTemplate,
   gitignoreTemplate,
+  getAllRoleSpecs,
 } from "../templates/trellis/index.js";
 
 // Import markdown templates
@@ -213,5 +214,18 @@ async function createSpecTemplates(
         doc.content,
       );
     }
+  }
+
+  // Role specs - always created (used by three-role collaboration pipeline)
+  const roleSpecs = getAllRoleSpecs();
+  for (const [relativePath, content] of roleSpecs) {
+    const roleDir = path.dirname(
+      path.join(cwd, `${PATHS.SPEC}/roles`, relativePath),
+    );
+    ensureDir(roleDir);
+    await writeFile(
+      path.join(cwd, `${PATHS.SPEC}/roles`, relativePath),
+      content,
+    );
   }
 }

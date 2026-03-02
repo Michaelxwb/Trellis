@@ -65,6 +65,98 @@ def run_script(script_path: Path) -> str:
         return "No context available"
 
 
+def inject_role_context(project_dir: Path, output):
+    """Inject role context and upstream handoff/changelog if in collaboration mode.
+
+    Fail-safe: any error is silently caught so it never breaks session start.
+    """
+    try:
+        trellis_dir = project_dir / ".trellis"
+        if trellis_dir.is_dir():
+            sys.path.insert(0, str(trellis_dir))
+
+        from scripts.common.roles import (
+            resolve_role_constraint,
+            load_roles_json,
+            get_upstream_dirs,
+        )
+    except ImportError:
+        return  # roles module not available, skip silently
+
+    try:
+        role, output_dir = resolve_role_constraint(project_dir)
+        if not role:
+            return  # Not in collaboration mode
+
+        # --- Role context ---
+        output.write("<role-context>\n")
+        output.write(f"## Current Role: {role}\n")
+        output.write(f"## Output Directory: {output_dir}\n")
+        output.write("\n")
+
+        # Role spec files
+        role_dir_map = {"pm": "pm", "designer": "designer", "frontend": "frontend-impl"}
+        spec_dir = project_dir / ".trellis" / "spec" / "roles"
+        role_spec_dir = spec_dir / role_dir_map.get(role, role)
+        if role_spec_dir.is_dir():
+            for spec_file in sorted(role_spec_dir.glob("*.md")):
+                if spec_file.is_file():
+                    try:
+                        rel = spec_file.relative_to(project_dir)
+                    except ValueError:
+                        rel = spec_file.name
+                    output.write(f"### {rel}\n")
+                    content = spec_file.read_text(encoding="utf-8")
+                    output.write(content[:3000])
+                    if len(content) > 3000:
+                        output.write("\n... (truncated)")
+                    output.write("\n\n")
+
+        output.write("</role-context>\n\n")
+
+        # --- Upstream context ---
+        roles_json = load_roles_json(project_dir)
+        if not roles_json:
+            return
+
+        upstream_dirs = get_upstream_dirs(role, roles_json)
+        if not upstream_dirs:
+            return
+
+        output.write("<upstream-context>\n")
+        for upstream_dir in upstream_dirs:
+            upstream_path = project_dir / upstream_dir
+            if not upstream_path.is_dir():
+                continue
+            # HANDOFF files
+            for handoff in sorted(upstream_path.rglob("HANDOFF.md")):
+                try:
+                    rel = handoff.relative_to(project_dir)
+                except ValueError:
+                    rel = handoff.name
+                output.write(f"### {rel}\n")
+                content = handoff.read_text(encoding="utf-8")
+                output.write(content[:3000])
+                if len(content) > 3000:
+                    output.write("\n... (truncated)")
+                output.write("\n\n")
+            # CHANGELOG files
+            for changelog in sorted(upstream_path.rglob("CHANGELOG.md")):
+                try:
+                    rel = changelog.relative_to(project_dir)
+                except ValueError:
+                    rel = changelog.name
+                output.write(f"### {rel}\n")
+                content = changelog.read_text(encoding="utf-8")
+                output.write(content[:3000])
+                if len(content) > 3000:
+                    output.write("\n... (truncated)")
+                output.write("\n\n")
+        output.write("</upstream-context>\n\n")
+    except Exception:
+        pass  # Fail-safe: never break session start
+
+
 def main():
     if should_skip_injection():
         sys.exit(0)
@@ -115,6 +207,9 @@ Read and follow all instructions below carefully.
     output.write(guides_index)
 
     output.write("\n</guidelines>\n\n")
+
+    # Inject role context and upstream handoff/changelog (collaboration mode)
+    inject_role_context(project_dir, output)
 
     output.write("<instructions>\n")
     start_md = read_file(

@@ -74,6 +74,10 @@ program
     "-u, --user <name>",
     "Initialize developer identity with specified name",
   )
+  .option(
+    "-d, --dir <path>",
+    "Bind output directory for collaboration mode (requires -u with role prefix)",
+  )
   .option("-f, --force", "Overwrite existing files without asking")
   .option("-s, --skip-existing", "Skip existing files without asking")
   .option(

@@ -64,6 +64,7 @@ from .paths import (
     FILE_CURRENT_TASK,
     FILE_TASK_JSON,
     FILE_JOURNAL_PREFIX,
+    FILE_ROLES_JSON,
     get_repo_root,
     get_developer,
     check_developer,
@@ -77,4 +78,14 @@ from .paths import (
     clear_current_task,
     has_current_task,
     generate_task_date_prefix,
+)
+
+from .roles import (
+    KNOWN_ROLES,
+    parse_role_from_username,
+    load_roles_json,
+    save_roles_json,
+    get_upstream_dirs,
+    upsert_developer_role,
+    resolve_role_constraint,
 )

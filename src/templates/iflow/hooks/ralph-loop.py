@@ -17,6 +17,7 @@ State file: .trellis/.ralph-state.json
 - Tracks current iteration count per session
 - Resets when task changes
 """
+from __future__ import annotations
 
 # IMPORTANT: Suppress all warnings FIRST
 import warnings

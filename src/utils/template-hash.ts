@@ -208,7 +208,9 @@ const EXCLUDE_FROM_HASH = [
   ".current-task", // Current task marker (file, not directory)
   "spec/frontend/", // User-filled spec files
   "spec/backend/", // User-filled spec files
+  "spec/roles/", // Role spec templates (user-customizable)
   ".backup-", // Backup directories
+  "roles.json", // Role mapping file (user data)
 ];
 
 /**
