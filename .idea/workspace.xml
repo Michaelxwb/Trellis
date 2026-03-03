@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6346ec91-1be5-41bb-8b07-ac6783da6baf" name="Changes" comment="修复一些问题" />
+    <list default="true" id="6346ec91-1be5-41bb-8b07-ac6783da6baf" name="Changes" comment="修复一些问题">
+      <change afterPath="$PROJECT_DIR$/.claude/commands/trellis/create-manifest.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.cursor/commands/trellis-create-manifest.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/migrations/manifests/0.3.1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/.version" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/spec/backend/platform-integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/spec/backend/platform-integration.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/spec/guides/code-reuse-thinking-guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/spec/guides/code-reuse-thinking-guide.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/workspace/taosu/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/workspace/taosu/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/workspace/taosu/journal-2.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/workspace/taosu/journal-2.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/configurators/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configurators/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/manifests/0.3.0-beta.0.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/migrations/manifests/0.3.0-beta.0.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/migrations/manifests/0.3.0.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/migrations/manifests/0.3.0.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/claude/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/claude/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/iflow/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/iflow/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/markdown/spec/guides/code-reuse-thinking-guide.md.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/markdown/spec/guides/code-reuse-thinking-guide.md.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/migrations/index.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/migrations/index.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/regression.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/regression.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/templates/claude.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/templates/claude.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/templates/iflow.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/templates/iflow.test.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,13 +59,13 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "go.sdk.automatically.set": "true",
     "last_opened_file_path": "/Users/jahan/workspace/Trellis",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "pnpm",
-    "ts.external.directory.path": "/Users/jahan/workspace/Trellis/node_modules/typescript/lib"
+    "ts.external.directory.path": "/Applications/GoLand.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external"
   }
 }]]></component>
   <component name="SharedIndexes">
