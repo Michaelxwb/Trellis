@@ -206,6 +206,7 @@ const EXCLUDE_FROM_HASH = [
   "workspace/", // Workspace files (user data)
   "tasks/", // Task files (user data)
   ".current-task", // Current task marker (file, not directory)
+  "spec/", // User-filled spec files
   "spec/frontend/", // User-filled spec files
   "spec/backend/", // User-filled spec files
   "spec/roles/", // Role spec templates (user-customizable)

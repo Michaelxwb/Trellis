@@ -67,6 +67,7 @@ const EXPECTED_COMMAND_NAMES = [
   "check-frontend",
   "create-command",
   "finish-work",
+  "handoff",
   "integrate-skill",
   "onboard",
   "parallel",
