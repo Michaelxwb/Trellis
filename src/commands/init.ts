@@ -29,8 +29,12 @@ import { initializeHashes } from "../utils/template-hash.js";
 import {
   fetchTemplateIndex,
   downloadTemplateById,
+  TIMEOUTS,
+  TEMPLATE_INDEX_URL,
+  type SpecTemplate,
   type TemplateStrategy,
 } from "../utils/template-fetcher.js";
+import { setupProxy, maskProxyUrl } from "../utils/proxy.js";
 
 /**
  * Detect available Python command (python3 or python)
@@ -347,6 +351,7 @@ interface InitOptions {
   kiro?: boolean;
   gemini?: boolean;
   antigravity?: boolean;
+  qoder?: boolean;
   yes?: boolean;
   user?: string;
   dir?: string;
@@ -382,6 +387,12 @@ export async function init(options: InitOptions): Promise<void> {
       "\n   All-in-one AI framework & toolkit for Claude Code & Cursor\n",
     ),
   );
+
+  // Set up proxy before any network calls
+  const proxyUrl = setupProxy();
+  if (proxyUrl) {
+    console.log(chalk.gray(`   Using proxy: ${maskProxyUrl(proxyUrl)}\n`));
+  }
 
   // Set write mode based on options
   let writeMode: WriteMode = "ask";
@@ -537,12 +548,40 @@ export async function init(options: InitOptions): Promise<void> {
     templateStrategy = "append";
   }
 
+  // Pre-fetched templates list (used to pass selected SpecTemplate to downloadTemplateById)
+  let fetchedTemplates: SpecTemplate[] = [];
+
   if (options.template) {
     // Template specified via --template flag
     selectedTemplate = options.template;
   } else if (!options.yes) {
     // Interactive mode: show template selection
+    const timeoutSec = TIMEOUTS.INDEX_FETCH_MS / 1000;
+    console.log(
+      chalk.gray(`   Fetching available templates from ${TEMPLATE_INDEX_URL}`),
+    );
+    let elapsed = 0;
+    const ticker = setInterval(() => {
+      elapsed++;
+      process.stdout.write(
+        `\r${chalk.gray(`   Loading... ${elapsed}s/${timeoutSec}s`)}`,
+      );
+    }, 1000);
+    process.stdout.write(chalk.gray(`   Loading... 0s/${timeoutSec}s`));
     const templates = await fetchTemplateIndex();
+    clearInterval(ticker);
+    // Clear the loading line
+    process.stdout.write("\r\x1b[2K");
+    fetchedTemplates = templates;
+
+    if (templates.length === 0) {
+      console.log(
+        chalk.gray(
+          "   Could not fetch templates (offline or server unavailable).",
+        ),
+      );
+      console.log(chalk.gray("   Using blank templates.\n"));
+    }
 
     if (templates.length > 0) {
       // Build template choices with "blank" as first (default)
@@ -605,10 +644,16 @@ export async function init(options: InitOptions): Promise<void> {
 
   if (selectedTemplate) {
     console.log(chalk.blue(`📦 Downloading template "${selectedTemplate}"...`));
+    console.log(chalk.gray("   This may take a moment on slow connections."));
+
+    // Find pre-fetched SpecTemplate to avoid double-fetch
+    const prefetched = fetchedTemplates.find((t) => t.id === selectedTemplate);
+
     const result = await downloadTemplateById(
       cwd,
       selectedTemplate,
       templateStrategy,
+      prefetched,
     );
 
     if (result.success) {
@@ -621,6 +666,11 @@ export async function init(options: InitOptions): Promise<void> {
     } else {
       console.log(chalk.yellow(`   ${result.message}`));
       console.log(chalk.gray("   Falling back to blank templates..."));
+      console.log(
+        chalk.gray(
+          `   You can retry later: trellis init --template ${selectedTemplate}`,
+        ),
+      );
     }
   }
 

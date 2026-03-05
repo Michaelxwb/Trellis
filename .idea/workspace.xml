@@ -4,7 +4,208 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6346ec91-1be5-41bb-8b07-ac6783da6baf" name="Changes" comment="修复一些问题" />
+    <list default="true" id="6346ec91-1be5-41bb-8b07-ac6783da6baf" name="Changes" comment="同步最新主分支代码">
+      <change afterPath="$PROJECT_DIR$/.trellis/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/scripts/common/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/03-04-record-session-task-awareness/prd.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/03-04-record-session-task-awareness/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-20-product-positioning-kleinhe/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-doc-collaboration-research-kleinhe/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-mkt-growth-guide-kleinhe/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-superpower-research-kleinhe/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-update-improvements-kleinhe/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-update-mechanism-fixes-kleinhe/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-better-issue-recording/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-readme-visual-polish/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-03/03-04-init-download-ux/prd.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-03/03-04-init-download-ux/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-03/03-04-support-trae-qoder/check.jsonl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-03/03-04-support-trae-qoder/debug.jsonl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-03/03-04-support-trae-qoder/implement.jsonl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-03/03-04-support-trae-qoder/prd.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-03/03-04-support-trae-qoder/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-03/03-04-update-skip-spec/task.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/configurators/qoder.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/migrations/manifests/0.3.2.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/migrations/manifests/0.3.3.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/before-backend-dev/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/before-frontend-dev/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/brainstorm/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/break-loop/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/check-backend/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/check-cross-layer/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/check-frontend/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/create-command/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/finish-work/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/integrate-skill/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/onboard/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/record-session/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/start/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/qoder/skills/update-spec/SKILL.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/trellis/config.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/common/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/proxy.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/templates/qoder.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wx-group-qr.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.claude/commands/trellis/record-session.md" beforeDir="false" afterPath="$PROJECT_DIR$/.claude/commands/trellis/record-session.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/.version" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/scripts/add_session.py" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/scripts/add_session.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/scripts/common/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/scripts/common/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/scripts/common/git_context.py" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/scripts/common/git_context.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/scripts/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/scripts/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/spec/backend/platform-integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/spec/backend/platform-integration.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/spec/backend/script-conventions.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/spec/backend/script-conventions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/spec/guides/cross-layer-thinking-guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/spec/guides/cross-layer-thinking-guide.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/spec/unit-test/conventions.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/spec/unit-test/conventions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-15-devops-enhancements-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-15-devops-enhancements-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-15-devops-enhancements-kleinhe/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-15-devops-enhancements-kleinhe/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-15-marketing-readme-kleinhe/README-new.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-15-marketing-readme-kleinhe/README-new.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-15-marketing-readme-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-15-marketing-readme-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-15-marketing-readme-kleinhe/readme-draft.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-15-marketing-readme-kleinhe/readme-draft.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-15-marketing-readme-kleinhe/research-readme-patterns.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-15-marketing-readme-kleinhe/research-readme-patterns.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-15-marketing-readme-kleinhe/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-15-marketing-readme-kleinhe/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-15-opencode-support-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-15-opencode-support-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-15-opencode-support-kleinhe/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-15-opencode-support-kleinhe/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-16-conversation-persistence-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-16-conversation-persistence-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-16-conversation-persistence-kleinhe/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-16-conversation-persistence-kleinhe/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-16-monorepo-support-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-16-monorepo-support-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-16-monorepo-support-kleinhe/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-16-monorepo-support-kleinhe/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/bootstrap-skill/SKILL.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/bootstrap-skill/SKILL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/bootstrap-skill/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/bootstrap-skill/install.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/check.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/check.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/00-comparison-summary.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/00-comparison-summary.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/acontext.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/acontext.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/aider.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/aider.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/bmad-method.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/bmad-method.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/claude-code.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/claude-code.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/claude-cowork.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/claude-cowork.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/cline.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/cline.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/continue.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/continue.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/cursor.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/cursor.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/github-copilot.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/github-copilot.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/memu.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/memu.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/opencode.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/opencode.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/openspec.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/openspec.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/planning-with-files.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/planning-with-files.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/roo-code.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/roo-code.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/superpowers.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/superpowers.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/competitors/windsurf.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/competitors/windsurf.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/debug.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/debug.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/implement.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/implement.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/research-summary.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/research-summary.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/version1/DESIGN-NOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/version1/DESIGN-NOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/version1/README-zh.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/version1/README-zh.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/version1/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/version1/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/version2/DESIGN-NOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/version2/DESIGN-NOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/version2/README-zh.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/version2/README-zh.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/version2/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/version2/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/version3/DESIGN-NOTES.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/version3/DESIGN-NOTES.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/version3/README-zh.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/version3/README-zh.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-19-readme-redesign-taosu/version3/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-19-readme-redesign-taosu/version3/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-20-product-positioning-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-20-product-positioning-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-20-product-positioning-kleinhe/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-doc-collaboration-research-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-doc-collaboration-research-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-doc-collaboration-research-kleinhe/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/00-research-methodology.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/00-research-methodology.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/01-continue.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/01-continue.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/02-opencode.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/02-opencode.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/03-superpowers.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/03-superpowers.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/04-openspec.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/04-openspec.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/05-roo-code.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/05-roo-code.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/06-claude-mem.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/06-claude-mem.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/99-summary.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/99-summary.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-early-marketing-research-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-early-marketing-research-kleinhe/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-mkt-growth-guide-kleinhe/daily-checklist.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-mkt-growth-guide-kleinhe/daily-checklist.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-mkt-growth-guide-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-mkt-growth-guide-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-mkt-growth-guide-kleinhe/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-mkt-growth-guide-kleinhe/timeline.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-mkt-growth-guide-kleinhe/timeline.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-superpower-research-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-superpower-research-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-superpower-research-kleinhe/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-update-improvements-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-update-improvements-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-update-improvements-kleinhe/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-update-mechanism-fixes-kleinhe/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-21-update-mechanism-fixes-kleinhe/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-21-update-mechanism-fixes-kleinhe/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-better-issue-recording/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-better-issue-recording/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-better-issue-recording/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-readme-visual-polish/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-readme-visual-polish/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-readme-visual-polish/task.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-review-naming-pr/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-review-naming-pr/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-trellis-agents-gui/check.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-trellis-agents-gui/check.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-trellis-agents-gui/debug.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-trellis-agents-gui/debug.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-trellis-agents-gui/implement.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-trellis-agents-gui/implement.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-trellis-agents-gui/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-trellis-agents-gui/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-22-trellis-agents-gui/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-22-trellis-agents-gui/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-26-mintlify-docs/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-26-mintlify-docs/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-26-mintlify-docs/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-26-mintlify-docs/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-27-readme-enhancements/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-27-readme-enhancements/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/01-27-readme-enhancements/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-01/01-27-readme-enhancements/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-01-opencode-support/check.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-01-opencode-support/check.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-01-opencode-support/debug.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-01-opencode-support/debug.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-01-opencode-support/implement.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-01-opencode-support/implement.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-01-opencode-support/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-01-opencode-support/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-01-opencode-support/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-01-opencode-support/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-01-opencode-support/task.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-01-opencode-support/task.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-e2e-integration-tests/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-e2e-integration-tests/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-e2e-integration-tests/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-e2e-integration-tests/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-platform-registry-refactor/check.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-platform-registry-refactor/check.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-platform-registry-refactor/debug.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-platform-registry-refactor/debug.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-platform-registry-refactor/implement.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-platform-registry-refactor/implement.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-platform-registry-refactor/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-platform-registry-refactor/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-platform-registry-refactor/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-platform-registry-refactor/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-python-windows-testing/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-python-windows-testing/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-python-windows-testing/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-python-windows-testing/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-unit-test-platform-registry/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-unit-test-platform-registry/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-06-unit-test-platform-registry/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-06-unit-test-platform-registry/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-28-migrate-to-0.3.0/prd.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-28-migrate-to-0.3.0/prd.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/tasks/02-28-migrate-to-0.3.0/task.json" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/tasks/archive/2026-02/02-28-migrate-to-0.3.0/task.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/workspace/taosu/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/workspace/taosu/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.trellis/workspace/taosu/journal-2.md" beforeDir="false" afterPath="$PROJECT_DIR$/.trellis/workspace/taosu/journal-2.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_CN.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_CN.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/guide-zh.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/guide-zh.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/guide.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/create-manifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/create-manifest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cli/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/cli/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/init.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/init.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/update.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/update.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/configurators/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configurators/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/configurators/workflow.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configurators/workflow.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/claude/commands/trellis/record-session.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/claude/commands/trellis/record-session.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/codex/skills/record-session/SKILL.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/codex/skills/record-session/SKILL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/cursor/commands/trellis-record-session.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/cursor/commands/trellis-record-session.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/extract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/extract.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/gemini/commands/trellis/record-session.toml" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/gemini/commands/trellis/record-session.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/iflow/commands/trellis/record-session.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/iflow/commands/trellis/record-session.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/iflow/hooks/session-start.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/iflow/hooks/session-start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/kilo/commands/trellis/record-session.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/kilo/commands/trellis/record-session.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/kiro/skills/record-session/SKILL.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/kiro/skills/record-session/SKILL.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/opencode/commands/trellis/record-session.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/opencode/commands/trellis/record-session.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/trellis/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/trellis/scripts/add_session.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/add_session.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/trellis/scripts/common/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/common/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/trellis/scripts/common/cli_adapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/common/cli_adapter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/trellis/scripts/common/git_context.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/common/git_context.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/trellis/scripts/multi_agent/plan.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/multi_agent/plan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/trellis/scripts/multi_agent/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/multi_agent/start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/trellis/scripts/task.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/trellis/scripts/task.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/ai-tools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/ai-tools.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/template-fetcher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/template-fetcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/commands/init.integration.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/commands/init.integration.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/commands/update.integration.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/commands/update.integration.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/configurators/platforms.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/configurators/platforms.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/regression.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/regression.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/templates/extract.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/templates/extract.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/utils/template-hash.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/test/utils/template-hash.test.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,13 +240,13 @@
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "go.sdk.automatically.set": "true",
     "last_opened_file_path": "/Users/jahan/workspace/Trellis",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "pnpm",
-    "ts.external.directory.path": "/Applications/GoLand.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external"
+    "ts.external.directory.path": "/Users/jahan/workspace/Trellis/node_modules/typescript/lib"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -71,6 +272,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="修复一些问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修复一些问题" />
+    <MESSAGE value="同步最新主分支代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="同步最新主分支代码" />
   </component>
 </project>

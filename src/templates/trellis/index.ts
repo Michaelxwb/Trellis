@@ -13,6 +13,7 @@
  *   │   └── *.py              # Main scripts (Python)
  *   ├── scripts-shell-archive/ # Archived shell scripts (for reference)
  *   ├── workflow.md           # Workflow guide
+ *   ├── config.yaml            # Trellis configuration
  *   ├── worktree.yaml         # Worktree configuration
  *   └── gitignore.txt         # .gitignore content
  */
@@ -43,6 +44,7 @@ export const commonPhase = readTemplate("scripts/common/phase.py");
 export const commonRegistry = readTemplate("scripts/common/registry.py");
 export const commonCliAdapter = readTemplate("scripts/common/cli_adapter.py");
 export const commonRoles = readTemplate("scripts/common/roles.py");
+export const commonConfig = readTemplate("scripts/common/config.py");
 
 // Python scripts - multi_agent
 export const multiAgentInit = readTemplate("scripts/multi_agent/__init__.py");
@@ -95,6 +97,7 @@ export const specRolesFrontendImplChangelogTemplate = readTemplate(
 
 // Configuration files
 export const workflowMdTemplate = readTemplate("workflow.md");
+export const configYamlTemplate = readTemplate("config.yaml");
 export const worktreeYamlTemplate = readTemplate("worktree.yaml");
 export const gitignoreTemplate = readTemplate("gitignore.txt");
 
@@ -119,6 +122,7 @@ export function getAllScripts(): Map<string, string> {
   scripts.set("common/registry.py", commonRegistry);
   scripts.set("common/cli_adapter.py", commonCliAdapter);
   scripts.set("common/roles.py", commonRoles);
+  scripts.set("common/config.py", commonConfig);
 
   // Multi-agent
   scripts.set("multi_agent/__init__.py", multiAgentInit);

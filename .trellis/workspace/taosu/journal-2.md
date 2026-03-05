@@ -1526,3 +1526,367 @@ Found by comparing with PR #47 — original implementation had zero tests.
 ### Next Steps
 
 - None - task complete
+
+
+## Session 59: feat: record-session auto-commit workspace changes
+
+**Date**: 2026-03-03
+**Task**: feat: record-session auto-commit workspace changes
+
+### Summary
+
+add_session.py 写完 journal/index 后自动 git add .trellis/workspace && git commit，解决 record-session 后工作目录脏的问题。同步更新 8 个平台的 record-session 命令模板。
+
+### Main Changes
+
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `d5ac365` | (see git log) |
+| `8fa5771` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
+
+
+## Session 60: feat: record-session auto-commit + config.yaml
+
+**Date**: 2026-03-03
+**Task**: feat: record-session auto-commit + config.yaml
+
+### Summary
+
+record-session 执行后自动提交 workspace 改动，解决脏目录问题。新增 .trellis/config.yaml 支持配置 session_commit_message 和 max_journal_lines，替代硬编码。
+
+### Main Changes
+
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `d5ac365` | (see git log) |
+| `8fa5771` | (see git log) |
+| `7c4a829` | (see git log) |
+| `f2370fe` | (see git log) |
+| `1d5a84a` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
+
+
+## Session 61: feat: update 跳过 spec 目录
+
+**Date**: 2026-03-04
+**Task**: feat: update 跳过 spec 目录
+
+### Summary
+
+(Add summary)
+
+### Main Changes
+
+## 概要
+trellis update 不再触碰 .trellis/spec/ 下的任何文件，spec 是用户自定义内容，仅在 init 时创建。
+
+## 改动
+
+| 文件 | 变更 |
+|------|------|
+| `src/commands/update.ts` | 删除 16 个 spec import、移除 collectTemplateFiles 中 ~65 行 spec 收集逻辑、PROTECTED_PATHS 和 BACKUP_EXCLUDE_PATTERNS 各加 spec/ |
+| `src/utils/template-hash.ts` | EXCLUDE_FROM_HASH 合并 spec/frontend/ + spec/backend/ 为 spec/ |
+| `test/commands/update.integration.test.ts` | 重写 #13 #14 验证 spec 不被更新触碰 |
+| `test/utils/template-hash.test.ts` | 新增 spec 目录排除测试 |
+
+## 验证
+- 389 tests passed, lint + typecheck clean
+- Check Agent 复查 0 issues
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `1beb64f` | (see git log) |
+| `a9ed34a` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
+
+
+## Session 62: feat: init/update 网络体验优化 — 代理+超时+进度提示
+
+**Date**: 2026-03-04
+**Task**: feat: init/update 网络体验优化 — 代理+超时+进度提示
+
+### Summary
+
+(Add summary)
+
+### Main Changes
+
+## 概要
+优化 trellis init/update 的网络体验：添加代理支持、超时处理、进度提示和友好错误信息。
+
+## 改动
+
+| 文件 | 变更 |
+|------|------|
+| `src/utils/proxy.ts` | 新建：检测 HTTPS_PROXY/HTTP_PROXY/ALL_PROXY 环境变量，使用 undici ProxyAgent + setGlobalDispatcher 全局代理 |
+| `src/utils/template-fetcher.ts` | fetchTemplateIndex 加 AbortSignal.timeout(15s)；giget 下载用 Promise.race 30s 超时 + 目录清理；downloadTemplateById 接受预取 SpecTemplate 消除 double-fetch；错误分类（超时/网络/通用） |
+| `src/commands/init.ts` | 调用 setupProxy()、进度提示、脱敏代理 URL 日志、传预取 template、失败重试提示 |
+| `src/commands/update.ts` | 调用 setupProxy() 覆盖 npm 版本检查 fetch |
+| `package.json` | 添加 undici v6 依赖、engines.node 从 >=18.0.0 提升到 >=18.17.0 |
+
+## Review 修复
+- P1: undici v7→v6 保持 Node 18 兼容（v6 要求 >=18.17）
+- P2: ProxyAgent 构造 try/catch 防崩溃
+- P2: 超时后 rmSync 清理目录 + 注释说明 giget 不支持 abort
+- P2: maskProxyUrl 脱敏代理凭据
+- P1: 动态 import("undici") 改回静态 import（确保运行时可用）
+
+## 验证
+- 389 tests passed, lint + typecheck clean
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `b7c50b6` | (see git log) |
+| `61bbba2` | (see git log) |
+| `5e831cd` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
+
+
+## Session 63: fix: 模板 fetch 倒计时显示 + 超时缩短
+
+**Date**: 2026-03-04
+**Task**: fix: 模板 fetch 倒计时显示 + 超时缩短
+
+### Summary
+
+(Add summary)
+
+### Main Changes
+
+## 概要
+根据实际测试反馈优化模板 fetch 的 UX 显示。
+
+## 改动
+- 超时从 15s 缩短到 5s（拉模板列表不需要等太久）
+- 显示 GitHub 源 URL 单独一行
+- 新增实时倒计时 `Loading... 2s/5s`（setInterval + process.stdout.write 原地更新）
+- fetch 完成后清除 loading 行
+
+## 验证
+- 389 tests passed, lint + typecheck clean
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `f66cd4c` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
+
+
+## Session 64: fix: record-session 模板去除 auto-commit 提示
+
+**Date**: 2026-03-04
+**Task**: fix: record-session 模板去除 auto-commit 提示
+
+### Summary
+
+从 8 个平台的 record-session 模板中删除 auto-commit 和 --no-commit 相关提示，避免 AI 误加 --no-commit 参数导致自动提交失效
+
+### Main Changes
+
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `4c82869` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
+
+
+## Session 65: Windows stdin UTF-8 fix & record-session template cleanup
+
+**Date**: 2026-03-04
+**Task**: Windows stdin UTF-8 fix & record-session template cleanup
+
+### Summary
+
+Fixed Windows stdin UTF-8 encoding bug (garbled Chinese when piping via stdin), cleaned up record-session templates, and updated spec documentation
+
+### Main Changes
+
+| Change | Description |
+|--------|-------------|
+| **Windows stdin UTF-8 fix** | Added `sys.stdin` to `_configure_stream()` in `common/__init__.py` — fixes garbled Chinese text when piping via stdin on Windows PowerShell |
+| **Centralized encoding** | Removed inline encoding code from `add_session.py` and `git_context.py` — all streams now handled by `common/__init__.py` |
+| **record-session template cleanup** | Removed auto-commit details from all 8 platform templates to prevent AI misusing `--no-commit` flag |
+| **Spec update** | Updated `backend/script-conventions.md` — documented stdin encoding issue, centralized approach, and anti-patterns |
+
+**Updated Files**:
+- `src/templates/trellis/scripts/common/__init__.py` — added stdin to encoding fix
+- `.trellis/scripts/common/__init__.py` — local copy updated
+- `src/templates/trellis/scripts/add_session.py` — removed inline encoding
+- `.trellis/scripts/add_session.py` — local copy updated
+- `src/templates/trellis/scripts/common/git_context.py` — removed inline encoding
+- `.trellis/scripts/common/git_context.py` — local copy updated
+- `.trellis/spec/backend/script-conventions.md` — documented stdin encoding
+
+**PRs**:
+- PR #66: fix(templates): remove auto-commit details from record-session prompts
+- PR #67: fix(scripts): centralize Windows stdio UTF-8 encoding
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `6bd5d4d` | (see git log) |
+| `cbd6b7f` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
+
+
+## Session 66: Skip user-customizable files during update
+
+**Date**: 2026-03-04
+**Task**: Skip user-customizable files during update
+
+### Summary
+
+workflow.md 和 workspace/index.md 从 update 模板收集中移除，只在 init 时创建。更新了 integration 测试使用 get_context.py 作为测试目标文件。
+
+### Main Changes
+
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `bebf241` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
+
+
+## Session 67: Fix nested Claude Code session error in multi-agent pipeline
+
+**Date**: 2026-03-04
+**Task**: Fix nested Claude Code session error in multi-agent pipeline
+
+### Summary
+
+修复 CC v2.1.39+ 引入的嵌套会话检测导致 /trellis:parallel 报错 'Claude Code cannot be launched inside another Claude Code session'。在 start.py 和 plan.py 中清除 CLAUDECODE 环境变量。同时修复了 update 跳过 workflow.md 和 workspace/index.md 的问题。
+
+### Main Changes
+
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `c220785` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete

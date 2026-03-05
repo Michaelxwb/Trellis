@@ -211,11 +211,13 @@ def run_command(
 
 ## Cross-Platform Compatibility
 
-### CRITICAL: Windows stdout Encoding
+### CRITICAL: Windows stdio Encoding (stdout + stdin)
 
-On Windows, Python's stdout defaults to the system code page (e.g., GBK/CP936 in China, CP1252 in Western locales). This causes `UnicodeEncodeError` when printing non-ASCII characters.
+On Windows, Python's stdout AND stdin default to the system code page (e.g., GBK/CP936 in China, CP1252 in Western locales). This causes:
+- `UnicodeEncodeError` when **printing** non-ASCII characters (stdout)
+- `UnicodeDecodeError` when **reading piped** UTF-8 content (stdin), e.g. Chinese text via `cat << EOF | python3 script.py`
 
-**The Problem Chain**:
+**The Problem Chain (stdout)**:
 
 ```
 Windows code page = GBK (936)
@@ -229,60 +231,64 @@ json.dumps(ensure_ascii=False) → print()
 GBK cannot encode \ufffd → UnicodeEncodeError: 'gbk' codec can't encode character
 ```
 
-**Root Cause**: Even if you set `PYTHONIOENCODING` in subprocess calls, the **parent process's stdout** still uses the system code page. The error occurs when `print()` tries to write to stdout.
+**The Problem Chain (stdin)**:
+
+```
+AI agent pipes UTF-8 content via heredoc: cat << 'EOF' | python3 add_session.py ...
+    ↓
+Python stdin defaults to GBK encoding (PowerShell default code page)
+    ↓
+sys.stdin.read() decodes bytes as GBK, not UTF-8
+    ↓
+Chinese text garbled or UnicodeDecodeError
+```
+
+**Root Cause**: Even if you set `PYTHONIOENCODING` in subprocess calls, the **parent process's stdio** still uses the system code page.
 
 ---
 
-#### GOOD: Use `sys.stdout.reconfigure()` (Python 3.7+)
+#### GOOD: Centralize encoding fix in `common/__init__.py`
 
-```python
-import sys
-
-# MUST be at the top of the script, before any print() calls
-if sys.platform == "win32":
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
-```
-
-**Why this works**: `reconfigure()` modifies the existing stream **in-place**, changing its encoding settings directly. This affects all subsequent writes to stdout.
-
-**Best Practice**: Add this to `common/__init__.py` so all scripts that `from common import ...` automatically get the fix:
+All stdio encoding is handled in one place. Scripts that `from common import ...` automatically get the fix:
 
 ```python
 # common/__init__.py
+import io
 import sys
 
-if sys.platform == "win32":
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+def _configure_stream(stream):
+    """Configure a stream for UTF-8 encoding on Windows."""
+    if hasattr(stream, "reconfigure"):
+        stream.reconfigure(encoding="utf-8", errors="replace")
+        return stream
+    elif hasattr(stream, "detach"):
+        return io.TextIOWrapper(stream.detach(), encoding="utf-8", errors="replace")
+    return stream
 
-# ... rest of exports
+if sys.platform == "win32":
+    sys.stdout = _configure_stream(sys.stdout)
+    sys.stderr = _configure_stream(sys.stderr)
+    sys.stdin = _configure_stream(sys.stdin)    # Don't forget stdin!
 ```
 
 ---
 
-#### BAD: Do NOT use `io.TextIOWrapper`
+#### DON'T: Inline encoding code in individual scripts
 
 ```python
-# BAD - This does NOT reliably fix the encoding issue!
+# BAD - Duplicated in every script, easy to forget stdin
 import sys
-import io
-
 if sys.platform == "win32":
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    # Forgot stdin! Piped Chinese text will break.
 ```
 
-**Why this fails**:
+**Why this is bad**:
+1. **Easy to forget streams**: stdout was fixed but stdin was missed in multiple scripts, causing real user bugs
+2. **Duplicated code**: Same logic copy-pasted across `add_session.py`, `git_context.py`, etc.
+3. **Inconsistent coverage**: Some scripts fix stdout only, others fix stdout+stderr, none fixed stdin
 
-1. **Creates a new wrapper, doesn't fix the underlying issue**: `TextIOWrapper` wraps `sys.stdout.buffer`, but the original stdout object and its encoding settings may still interfere in some code paths.
-
-2. **Loses original stdout properties**: The new wrapper may not preserve all attributes of the original `sys.stdout` (like `isatty()`, line buffering behavior).
-
-3. **Race condition with buffering**: If any output was buffered before the replacement, it may still be encoded with the old encoding.
-
-4. **Not idempotent**: Calling this multiple times creates nested wrappers, while `reconfigure()` is safe to call multiple times.
-
-**Real-world failure case**: Users reported that `io.TextIOWrapper` did not fix the `UnicodeEncodeError` on Windows, while `sys.stdout.reconfigure()` worked immediately.
+**Real-world failure**: Users on Windows reported garbled Chinese text when using `cat << EOF | python3 add_session.py`. Root cause: stdin was never reconfigured to UTF-8.
 
 ---
 
@@ -290,7 +296,8 @@ if sys.platform == "win32":
 
 | Method | Works? | Reason |
 |--------|--------|--------|
-| `sys.stdout.reconfigure(encoding="utf-8")` | ✅ Yes | Modifies stream in-place |
+| `common/__init__.py` centralized fix | ✅ Yes | All streams, all scripts, one place |
+| `sys.stdout.reconfigure(encoding="utf-8")` | ⚠️ Partial | Only stdout; easy to forget stdin/stderr |
 | `io.TextIOWrapper(sys.stdout.buffer, ...)` | ❌ No | Creates wrapper, doesn't fix underlying encoding |
 | `PYTHONIOENCODING=utf-8` env var | ⚠️ Partial | Only works if set **before** Python starts |
 
@@ -326,6 +333,68 @@ path = Path(".trellis") / "scripts" / "task.py"
 # Bad - Unix-only
 path = ".trellis/scripts/task.py"
 ```
+
+---
+
+## Auto-Commit Pattern
+
+Scripts that modify `.trellis/` tracked files should auto-commit their changes to keep the workspace clean. Use a `--no-commit` flag for opt-out.
+
+### Convention: Auto-Commit After Mutation
+
+```python
+def _auto_commit(scope: str, message: str, repo_root: Path) -> None:
+    """Stage and commit changes in a specific .trellis/ subdirectory."""
+    subprocess.run(["git", "add", "-A", scope], cwd=repo_root, capture_output=True)
+    # Check if there are staged changes
+    result = subprocess.run(
+        ["git", "diff", "--cached", "--quiet", "--", scope],
+        cwd=repo_root,
+    )
+    if result.returncode == 0:
+        print("[OK] No changes to commit.", file=sys.stderr)
+        return
+    commit_result = subprocess.run(
+        ["git", "commit", "-m", message],
+        cwd=repo_root, capture_output=True, text=True,
+    )
+    if commit_result.returncode == 0:
+        print(f"[OK] Auto-committed: {message}", file=sys.stderr)
+    else:
+        print(f"[WARN] Auto-commit failed: {commit_result.stderr.strip()}", file=sys.stderr)
+```
+
+**Scripts using this pattern**:
+- `add_session.py` — commits `.trellis/workspace` + `.trellis/tasks` after recording a session
+- `task.py archive` — commits `.trellis/tasks` after archiving a task
+
+**Always add `--no-commit` flag** for scripts that auto-commit, so users can opt out.
+
+---
+
+## CLI Mode Extension Pattern
+
+### Design Decision: `--mode` for Context-Dependent Output
+
+When a script needs different output for different use cases, use `--mode` (not separate scripts or additional flags).
+
+**Example**: `get_context.py` serves two modes:
+- `--mode default` — full session context (DEVELOPER, GIT STATUS, RECENT COMMITS, CURRENT TASK, ACTIVE TASKS, MY TASKS, JOURNAL, PATHS)
+- `--mode record` — focused output for record-session (MY ACTIVE TASKS first with emphasis, GIT STATUS, RECENT COMMITS, CURRENT TASK)
+
+```python
+parser.add_argument(
+    "--mode", "-m",
+    choices=["default", "record"],
+    default="default",
+    help="Output mode: default (full context) or record (for record-session)",
+)
+```
+
+**When to add a new mode** (not a new script):
+- Output is a subset/reordering of the same data
+- The underlying data sources are shared
+- The difference is in presentation, not in data fetching
 
 ---
 

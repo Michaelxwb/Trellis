@@ -8,8 +8,8 @@
 
 <!-- @@@auto:current-status -->
 - **Active File**: `journal-2.md`
-- **Total Sessions**: 58
-- **Last Active**: 2026-03-02
+- **Total Sessions**: 67
+- **Last Active**: 2026-03-04
 <!-- @@@/auto:current-status -->
 
 ---
@@ -19,7 +19,7 @@
 <!-- @@@auto:active-documents -->
 | File | Lines | Status |
 |------|-------|--------|
-| `journal-2.md` | ~1528 | Active |
+| `journal-2.md` | ~1892 | Active |
 | `journal-1.md` | ~1998 | Archived |
 <!-- @@@/auto:active-documents -->
 
@@ -30,6 +30,15 @@
 <!-- @@@auto:session-history -->
 | # | Date | Title | Commits |
 |---|------|-------|---------|
+| 67 | 2026-03-04 | Fix nested Claude Code session error in multi-agent pipeline | `c220785` |
+| 66 | 2026-03-04 | Skip user-customizable files during update | `bebf241` |
+| 65 | 2026-03-04 | Windows stdin UTF-8 fix & record-session template cleanup | `6bd5d4d`, `cbd6b7f` |
+| 64 | 2026-03-04 | fix: record-session 模板去除 auto-commit 提示 | `4c82869` |
+| 63 | 2026-03-04 | fix: 模板 fetch 倒计时显示 + 超时缩短 | `f66cd4c` |
+| 62 | 2026-03-04 | feat: init/update 网络体验优化 — 代理+超时+进度提示 | `b7c50b6`, `61bbba2`, `5e831cd` |
+| 61 | 2026-03-04 | feat: update 跳过 spec 目录 | `1beb64f`, `a9ed34a` |
+| 60 | 2026-03-03 | feat: record-session auto-commit + config.yaml | `d5ac365`, `8fa5771`, `7c4a829`, `f2370fe`, `1d5a84a` |
+| 59 | 2026-03-03 | feat: record-session auto-commit workspace changes | `d5ac365`, `8fa5771` |
 | 58 | 2026-03-02 | 0.3.1 manifest + create-manifest slash command | `de50b03`, `044d4c8` |
 | 57 | 2026-02-28 | fix: spec templates respect project type + dead code cleanup | `8f15f36` |
 | 56 | 2026-02-28 | 0.3.0 Release & Post-release Fixes | `e4b7227`, `c2e9118`, `d18137d`, `54798d7`, `be49762` |

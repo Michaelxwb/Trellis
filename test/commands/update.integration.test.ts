@@ -32,6 +32,9 @@ import { VERSION } from "../../src/constants/version.js";
 import { DIR_NAMES, PATHS } from "../../src/constants/paths.js";
 import { computeHash } from "../../src/utils/template-hash.js";
 
+// A managed template file that update always handles (Python script)
+const MANAGED_FILE = `${PATHS.SCRIPTS}/get_context.py`;
+
 describe("update() integration", () => {
   let tmpDir: string;
 
@@ -114,7 +117,7 @@ describe("update() integration", () => {
     await setupProject();
 
     // Delete a file to create a "new file" change
-    const target = path.join(tmpDir, PATHS.WORKFLOW_GUIDE_FILE);
+    const target = path.join(tmpDir, MANAGED_FILE);
     fs.unlinkSync(target);
 
     await update({ dryRun: true });
@@ -129,7 +132,7 @@ describe("update() integration", () => {
   it("#3 recreates deleted template file as new", async () => {
     await setupProject();
 
-    const target = path.join(tmpDir, PATHS.WORKFLOW_GUIDE_FILE);
+    const target = path.join(tmpDir, MANAGED_FILE);
     const originalContent = fs.readFileSync(target, "utf-8");
     fs.unlinkSync(target);
 
@@ -142,12 +145,12 @@ describe("update() integration", () => {
   it("#4 auto-updates file when template changed but user did not modify", async () => {
     await setupProject();
 
-    const targetRelative = PATHS.WORKFLOW_GUIDE_FILE;
+    const targetRelative = MANAGED_FILE;
     const targetFull = path.join(tmpDir, targetRelative);
     const templateContent = fs.readFileSync(targetFull, "utf-8");
 
     // Simulate "old template version": change file + update hash to match
-    const oldContent = "# Old version of workflow\n";
+    const oldContent = "# Old version of script\n";
     fs.writeFileSync(targetFull, oldContent);
 
     const hashFile = path.join(tmpDir, DIR_NAMES.WORKFLOW, ".template-hashes.json");
@@ -164,7 +167,7 @@ describe("update() integration", () => {
   it("#5 force overwrites user-modified files", async () => {
     await setupProject();
 
-    const targetFull = path.join(tmpDir, PATHS.WORKFLOW_GUIDE_FILE);
+    const targetFull = path.join(tmpDir, MANAGED_FILE);
     const templateContent = fs.readFileSync(targetFull, "utf-8");
 
     // User modifies file (hash won't match)
@@ -178,7 +181,7 @@ describe("update() integration", () => {
   it("#6 skipAll preserves user-modified files", async () => {
     await setupProject();
 
-    const targetFull = path.join(tmpDir, PATHS.WORKFLOW_GUIDE_FILE);
+    const targetFull = path.join(tmpDir, MANAGED_FILE);
     fs.writeFileSync(targetFull, "user customized content");
 
     await update({ skipAll: true });
@@ -189,7 +192,7 @@ describe("update() integration", () => {
   it("#7 createNew creates .new copy without overwriting original", async () => {
     await setupProject();
 
-    const targetFull = path.join(tmpDir, PATHS.WORKFLOW_GUIDE_FILE);
+    const targetFull = path.join(tmpDir, MANAGED_FILE);
     const templateContent = fs.readFileSync(targetFull, "utf-8");
     fs.writeFileSync(targetFull, "user customized content");
 
@@ -211,7 +214,7 @@ describe("update() integration", () => {
     fs.writeFileSync(versionPath, "0.0.1");
 
     // Delete a file so there is a change to trigger the full flow
-    fs.unlinkSync(path.join(tmpDir, PATHS.WORKFLOW_GUIDE_FILE));
+    fs.unlinkSync(path.join(tmpDir, MANAGED_FILE));
 
     await update({ force: true });
 
@@ -222,7 +225,7 @@ describe("update() integration", () => {
     await setupProject();
 
     // Delete a file to trigger the full update flow
-    fs.unlinkSync(path.join(tmpDir, PATHS.WORKFLOW_GUIDE_FILE));
+    fs.unlinkSync(path.join(tmpDir, MANAGED_FILE));
 
     await update({ force: true });
 
@@ -251,7 +254,7 @@ describe("update() integration", () => {
     fs.writeFileSync(versionPath, "99.99.99");
 
     // Delete a file so there is a change
-    const target = path.join(tmpDir, PATHS.WORKFLOW_GUIDE_FILE);
+    const target = path.join(tmpDir, MANAGED_FILE);
     fs.unlinkSync(target);
 
     await update({ allowDowngrade: true, force: true });
@@ -275,49 +278,32 @@ describe("update() integration", () => {
     expect(fs.readFileSync(versionPath, "utf-8")).toBe(VERSION);
   });
 
-  it("#13 update does not recreate removed spec/frontend dir (backend-only project)", async () => {
+  it("#13 user-edited spec/guides files are preserved after update with force", async () => {
     await setupProject();
 
-    // Simulate user deleted frontend spec (backend-only project)
-    const frontendSpecDir = path.join(tmpDir, PATHS.SPEC, "frontend");
-    fs.rmSync(frontendSpecDir, { recursive: true, force: true });
-
-    // Remove frontend hashes so update doesn't think they're "deleted files"
-    const hashFile = path.join(tmpDir, DIR_NAMES.WORKFLOW, ".template-hashes.json");
-    const hashes = JSON.parse(fs.readFileSync(hashFile, "utf-8")) as Record<string, string>;
-    const filtered = Object.fromEntries(
-      Object.entries(hashes).filter(([key]) => !key.includes("spec/frontend/")),
-    );
-    fs.writeFileSync(hashFile, JSON.stringify(filtered, null, 2));
+    // User customizes a spec guides file
+    const guidesIndex = path.join(tmpDir, PATHS.SPEC, "guides", "index.md");
+    expect(fs.existsSync(guidesIndex)).toBe(true);
+    const customContent = "# My Custom Guides\n\nEdited by user.\n";
+    fs.writeFileSync(guidesIndex, customContent);
 
     await update({ force: true });
 
-    // Frontend spec dir should NOT be recreated
-    expect(fs.existsSync(frontendSpecDir)).toBe(false);
-    // Backend spec should still exist
-    expect(fs.existsSync(path.join(tmpDir, PATHS.SPEC, "backend"))).toBe(true);
+    // User's customized content must be preserved (update should not touch spec/)
+    expect(fs.readFileSync(guidesIndex, "utf-8")).toBe(customContent);
   });
 
-  it("#14 update does not recreate removed spec/backend dir (frontend-only project)", async () => {
+  it("#14 deleted spec directory is NOT recreated by update", async () => {
     await setupProject();
 
-    // Simulate user deleted backend spec (frontend-only project)
-    const backendSpecDir = path.join(tmpDir, PATHS.SPEC, "backend");
-    fs.rmSync(backendSpecDir, { recursive: true, force: true });
-
-    // Remove backend hashes
-    const hashFile = path.join(tmpDir, DIR_NAMES.WORKFLOW, ".template-hashes.json");
-    const hashes = JSON.parse(fs.readFileSync(hashFile, "utf-8")) as Record<string, string>;
-    const filtered = Object.fromEntries(
-      Object.entries(hashes).filter(([key]) => !key.includes("spec/backend/")),
-    );
-    fs.writeFileSync(hashFile, JSON.stringify(filtered, null, 2));
+    // User deletes the entire spec directory
+    const specDir = path.join(tmpDir, PATHS.SPEC);
+    fs.rmSync(specDir, { recursive: true, force: true });
+    expect(fs.existsSync(specDir)).toBe(false);
 
     await update({ force: true });
 
-    // Backend spec dir should NOT be recreated
-    expect(fs.existsSync(backendSpecDir)).toBe(false);
-    // Frontend spec should still exist
-    expect(fs.existsSync(path.join(tmpDir, PATHS.SPEC, "frontend"))).toBe(true);
+    // spec/ directory should NOT be recreated by update
+    expect(fs.existsSync(specDir)).toBe(false);
   });
 });

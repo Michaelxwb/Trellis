@@ -27,6 +27,7 @@ import {
   computeHash,
 } from "../utils/template-hash.js";
 import { compareVersions } from "../utils/compare-versions.js";
+import { setupProxy } from "../utils/proxy.js";
 
 // Import templates for comparison
 import {
@@ -43,6 +44,7 @@ import {
   commonPhase,
   commonRegistry,
   commonCliAdapter,
+  commonConfig,
   // Python scripts - multi_agent
   multiAgentInit,
   multiAgentStart,
@@ -58,33 +60,10 @@ import {
   addSessionScript,
   createBootstrapScript,
   // Configuration
+  configYamlTemplate,
   worktreeYamlTemplate,
-  workflowMdTemplate,
   gitignoreTemplate,
 } from "../templates/trellis/index.js";
-
-import {
-  guidesIndexContent,
-  guidesCrossLayerThinkingGuideContent,
-  guidesCodeReuseThinkingGuideContent,
-  // Backend structure (multi-doc)
-  backendIndexContent,
-  backendDirectoryStructureContent,
-  backendDatabaseGuidelinesContent,
-  backendLoggingGuidelinesContent,
-  backendQualityGuidelinesContent,
-  backendErrorHandlingContent,
-  // Frontend structure (multi-doc)
-  frontendIndexContent,
-  frontendDirectoryStructureContent,
-  frontendTypeSafetyContent,
-  frontendHookGuidelinesContent,
-  frontendComponentGuidelinesContent,
-  frontendQualityGuidelinesContent,
-  frontendStateManagementContent,
-  // Workspace
-  workspaceIndexContent,
-} from "../templates/markdown/index.js";
 
 import {
   ALL_MANAGED_DIRS,
@@ -121,11 +100,11 @@ interface ChangeAnalysis {
 type ConflictAction = "overwrite" | "skip" | "create-new";
 
 // Paths that should never be touched (true user data)
-// Note: frontend/backend spec dirs removed - they should be created if missing,
-// and existing files are protected by hash-based modification tracking
+// spec/ is user-customized content created during init; update should never modify it
 const PROTECTED_PATHS = [
   `${DIR_NAMES.WORKFLOW}/${DIR_NAMES.WORKSPACE}`, // workspace/
   `${DIR_NAMES.WORKFLOW}/${DIR_NAMES.TASKS}`, // tasks/
+  `${DIR_NAMES.WORKFLOW}/${DIR_NAMES.SPEC}`, // spec/
   `${DIR_NAMES.WORKFLOW}/.developer`,
   `${DIR_NAMES.WORKFLOW}/.current-task`,
 ];
@@ -152,6 +131,7 @@ function collectTemplateFiles(cwd: string): Map<string, string> {
   files.set(`${PATHS.SCRIPTS}/common/phase.py`, commonPhase);
   files.set(`${PATHS.SCRIPTS}/common/registry.py`, commonRegistry);
   files.set(`${PATHS.SCRIPTS}/common/cli_adapter.py`, commonCliAdapter);
+  files.set(`${PATHS.SCRIPTS}/common/config.py`, commonConfig);
 
   // Python scripts - multi_agent
   files.set(`${PATHS.SCRIPTS}/multi_agent/__init__.py`, multiAgentInit);
@@ -170,79 +150,10 @@ function collectTemplateFiles(cwd: string): Map<string, string> {
   files.set(`${PATHS.SCRIPTS}/create_bootstrap.py`, createBootstrapScript);
 
   // Configuration
+  files.set(`${DIR_NAMES.WORKFLOW}/config.yaml`, configYamlTemplate);
   files.set(`${DIR_NAMES.WORKFLOW}/worktree.yaml`, worktreeYamlTemplate);
   files.set(`${DIR_NAMES.WORKFLOW}/.gitignore`, gitignoreTemplate);
-  files.set(PATHS.WORKFLOW_GUIDE_FILE, workflowMdTemplate);
-
-  // Workspace index (template file, not user data)
-  files.set(`${PATHS.WORKSPACE}/index.md`, workspaceIndexContent);
-
-  // Spec - guides
-  files.set(`${PATHS.SPEC}/guides/index.md`, guidesIndexContent);
-  files.set(
-    `${PATHS.SPEC}/guides/cross-layer-thinking-guide.md`,
-    guidesCrossLayerThinkingGuideContent,
-  );
-  files.set(
-    `${PATHS.SPEC}/guides/code-reuse-thinking-guide.md`,
-    guidesCodeReuseThinkingGuideContent,
-  );
-
-  // Spec - backend (only if spec/backend/ exists)
-  const backendSpecDir = path.join(cwd, `${PATHS.SPEC}/backend`);
-  if (fs.existsSync(backendSpecDir)) {
-    files.set(`${PATHS.SPEC}/backend/index.md`, backendIndexContent);
-    files.set(
-      `${PATHS.SPEC}/backend/directory-structure.md`,
-      backendDirectoryStructureContent,
-    );
-    files.set(
-      `${PATHS.SPEC}/backend/database-guidelines.md`,
-      backendDatabaseGuidelinesContent,
-    );
-    files.set(
-      `${PATHS.SPEC}/backend/logging-guidelines.md`,
-      backendLoggingGuidelinesContent,
-    );
-    files.set(
-      `${PATHS.SPEC}/backend/quality-guidelines.md`,
-      backendQualityGuidelinesContent,
-    );
-    files.set(
-      `${PATHS.SPEC}/backend/error-handling.md`,
-      backendErrorHandlingContent,
-    );
-  }
-
-  // Spec - frontend (only if spec/frontend/ exists)
-  const frontendSpecDir = path.join(cwd, `${PATHS.SPEC}/frontend`);
-  if (fs.existsSync(frontendSpecDir)) {
-    files.set(`${PATHS.SPEC}/frontend/index.md`, frontendIndexContent);
-    files.set(
-      `${PATHS.SPEC}/frontend/directory-structure.md`,
-      frontendDirectoryStructureContent,
-    );
-    files.set(
-      `${PATHS.SPEC}/frontend/type-safety.md`,
-      frontendTypeSafetyContent,
-    );
-    files.set(
-      `${PATHS.SPEC}/frontend/hook-guidelines.md`,
-      frontendHookGuidelinesContent,
-    );
-    files.set(
-      `${PATHS.SPEC}/frontend/component-guidelines.md`,
-      frontendComponentGuidelinesContent,
-    );
-    files.set(
-      `${PATHS.SPEC}/frontend/quality-guidelines.md`,
-      frontendQualityGuidelinesContent,
-    );
-    files.set(
-      `${PATHS.SPEC}/frontend/state-management.md`,
-      frontendStateManagementContent,
-    );
-  }
+  // workflow.md and workspace/index.md are user-customizable; only created during init
 
   // Platform-specific templates (only for configured platforms)
   for (const platformId of platforms) {
@@ -479,6 +390,7 @@ const BACKUP_EXCLUDE_PATTERNS = [
   ".backup-", // Previous backups
   "/workspace/", // Developer workspace (user data)
   "/tasks/", // Task data (user data)
+  "/spec/", // Spec files (user-customized content)
   "/backlog/", // Backlog data (user data)
   "/agent-traces/", // Agent traces (user data, legacy name)
 ];
@@ -1098,6 +1010,9 @@ export async function update(options: UpdateOptions): Promise<void> {
 
   console.log(chalk.cyan("\nTrellis Update"));
   console.log(chalk.cyan("══════════════\n"));
+
+  // Set up proxy before any network calls (npm version check)
+  setupProxy();
 
   // Get versions
   const projectVersion = getInstalledVersion(cwd);
