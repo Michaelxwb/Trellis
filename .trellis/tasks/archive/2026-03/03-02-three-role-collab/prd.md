@@ -44,12 +44,28 @@ V1.0 仅支持 Claude Code 平台。
 
 ## Acceptance Criteria
 
-- [ ] `trellis init -u pm-alice -d deliverables/req/` 生成 roles.json 和产出目录
-- [ ] 第二个开发者 init 后 roles.json 正确追加
-- [ ] 无 `-d` 参数时行为与当前完全一致
-- [ ] PreToolUse Hook 正确拦截跨目录写入
-- [ ] SessionStart 注入角色规范和上游产出物
-- [ ] `/trellis:handoff` 正确生成 HANDOFF.md 和 CHANGELOG.md
+- [x] `trellis init -u pm-alice -d deliverables/req/` 生成 roles.json 和产出目录
+- [x] 第二个开发者 init 后 roles.json 正确追加
+- [x] 无 `-d` 参数时行为与当前完全一致
+- [x] PreToolUse Hook 正确拦截跨目录写入
+- [x] SessionStart 注入角色规范和上游产出物
+- [x] `/trellis:handoff` 正确生成 HANDOFF.md 和 CHANGELOG.md
+
+## Implementation Summary
+
+所有 T1-T7 均已实现，实现位置：
+
+| Task | 文件路径 |
+|------|----------|
+| T1 | `src/templates/trellis/scripts/common/roles.py` |
+| T2 | `src/commands/init.ts` (L456-499, L942-1038) |
+| T3 | `src/templates/trellis/spec/roles/{pm,designer,frontend-impl}/` |
+| T4 | `src/templates/claude/hooks/enforce-output-dir.py` |
+| T5 | `src/templates/claude/hooks/session-start.py` → `inject_role_context()` |
+| T6 | `src/templates/claude/commands/trellis/handoff.md` |
+| T7 | `src/utils/template-hash.ts` (L212-214) |
+
+上游合并（193ef8c）新增 `--registry`/`--template`/subtask/config.yaml 等功能，与三角色代码无冲突。
 
 ## Technical Notes
 
