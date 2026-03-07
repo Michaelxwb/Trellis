@@ -226,3 +226,128 @@ Implemented `--registry` CLI flag allowing users to download spec templates from
 ### Next Steps
 
 - None - task complete
+
+
+## Session 73: v0.3.6 docs & release prep
+
+**Date**: 2026-03-06
+**Task**: v0.3.6 docs & release prep
+
+### Summary
+
+(Add summary)
+
+### Main Changes
+
+## Summary
+
+Prepared v0.3.6 release: migration manifest, README updates, and full docs site documentation for two new features (task lifecycle hooks and custom template registries).
+
+## Changes
+
+| Area | Description |
+|------|-------------|
+| **Migration manifest** | Created `src/migrations/manifests/0.3.6.json` covering 4 changes: --registry flag, lifecycle hooks, subtask support, record-session improvements |
+| **README** | Updated What's New in both `README.md` and `README_CN.md` with v0.3.5 entry; updated changelog links |
+| **Docs: v0.3.5 changelog** | Created `changelog/v0.3.5.mdx` (en + zh) — hotfix-only content; updated `docs.json` nav |
+| **Docs: lifecycle hooks** | Added section 6.6 to `ch06-task-management.mdx` (en + zh) — config.yaml format, 4 events, env vars, Linear sync example |
+| **Docs: remote spec templates** | Added section 2.5 to `ch02-quick-start.mdx` (en + zh) — marketplace, --registry flag, provider table, strategy flags, custom marketplace |
+| **Lint fix** | Added `<!-- markdownlint-disable MD024 MD001 -->` to ch02 files (pre-existing issue from Tabs bash comments) |
+
+## Key Decisions
+
+- v0.3.5 is hotfix-only; hooks/registry/subtasks are v0.3.6 features
+- Docs task tracked in docs repo (not Trellis repo)
+- Archived tmux-support task and cancelled Linear issue MIN-340
+
+## Repos Touched
+
+- **Trellis**: 2 commits (manifest + README)
+- **docs**: 3 commits (changelog + ch06 hooks + ch02 registry)
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `6d89ee9` | (see git log) |
+| `bf9d210` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
+
+
+## Session 74: Hotfix: PreToolUse hook Task→Agent rename
+
+**Date**: 2026-03-06
+**Task**: Hotfix: PreToolUse hook Task→Agent rename
+
+### Summary
+
+(Add summary)
+
+### Main Changes
+
+## Summary
+
+发现并修复 CC v2.1.63 将 Task 工具改名为 Agent 导致 Trellis PreToolUse context injection hook 全面失效的问题。
+
+## Root Cause
+
+CC v2.1.63 将内部 Agent 工具从 `Task` 改名为 `Agent`（[anthropics/claude-code#29677](https://github.com/anthropics/claude-code/issues/29677)）。settings.json matcher 做了向后兼容（`"Task"` 仍能匹配），但 hook 脚本收到的 `tool_name` 变成了 `"Agent"`，导致 `if tool_name != "Task": sys.exit(0)` 直接退出。
+
+**影响**：所有 CC v2.1.63+ 的 Trellis 用户，implement/check/debug/research agent 的 code-spec context 注入全部失效。
+
+## Investigation
+
+- 通过 debug log 确认 hook 实际收到 `tool_name=Agent`
+- Exa 调研找到 CC issue #29677 精确描述了这个 undocumented breaking change
+- 确认 iFlow 未证实有相同改名，settings.json 不改但 hook 脚本做防御性兼容
+
+## Fix
+
+| File | Change |
+|------|--------|
+| `src/templates/claude/hooks/inject-subagent-context.py` | `"Task"` → `("Task", "Agent")` |
+| `src/templates/claude/settings.json` | 新增 `"Agent"` matcher |
+| `src/templates/iflow/hooks/inject-subagent-context.py` | `("Task", "Agent")` 防御性兼容 |
+| `.claude/` 本地文件 | 同步修复 |
+
+## Verification
+
+- Explore agent: 无 hook error，正常跳过
+- research agent: 成功收到注入 context（"Research Agent Task"、"Project Spec Directory Structure" 等）
+- 410 tests 全过
+
+## Other Work
+
+- 创建了 v0.3.7 parent task 和 hook-start-equiv 子任务
+- 调研了 SessionStart hook vs `/trellis:start` 等效性问题
+
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `8cd1314` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete

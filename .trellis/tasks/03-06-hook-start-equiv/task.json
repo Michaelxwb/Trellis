@@ -1,7 +1,7 @@
 {
-  "id": "tmux-support",
-  "name": "tmux-support",
-  "title": "增加 tmux 支持",
+  "id": "hook-start-equiv",
+  "name": "hook-start-equiv",
+  "title": "Hook 注入后 AI 主动执行 start 流程",
   "description": "",
   "status": "planning",
   "dev_type": null,
@@ -9,10 +9,10 @@
   "priority": "P2",
   "creator": "taosu",
   "assignee": "taosu",
-  "createdAt": "2026-03-05",
+  "createdAt": "2026-03-06",
   "completedAt": null,
   "branch": null,
-  "base_branch": "feat/remote-spec",
+  "base_branch": "main",
   "worktree_path": null,
   "current_phase": 0,
   "next_action": [
@@ -36,10 +36,11 @@
   "commit": null,
   "pr_url": null,
   "subtasks": [],
+  "children": [],
+  "parent": "03-06-v037",
   "relatedFiles": [],
   "notes": "",
-  "parent": "03-05-v036-update",
   "meta": {
-    "linear_issue": "MIN-340"
+    "linear_issue": "MIN-343"
   }
 }

@@ -1,18 +1,18 @@
 {
-  "id": "hooks-docs",
-  "name": "hooks-docs",
-  "title": "更新 hooks 文档（文档站、meta-skill、workflow 等）",
+  "id": "v036-update",
+  "name": "v036-update",
+  "title": "Trellis v0.3.6 update",
   "description": "",
-  "status": "planning",
+  "status": "completed",
   "dev_type": null,
   "scope": null,
   "priority": "P2",
   "creator": "taosu",
   "assignee": "taosu",
   "createdAt": "2026-03-05",
-  "completedAt": null,
+  "completedAt": "2026-03-06",
   "branch": null,
-  "base_branch": "feat/task-lifecycle-hooks",
+  "base_branch": "feat/task-subtask",
   "worktree_path": null,
   "current_phase": 0,
   "next_action": [
@@ -37,10 +37,10 @@
   "pr_url": null,
   "subtasks": [],
   "children": [],
-  "parent": "03-05-v036-update",
+  "parent": null,
   "relatedFiles": [],
   "notes": "",
   "meta": {
-    "linear_issue": "MIN-341"
+    "linear_issue": "MIN-331"
   }
 }
